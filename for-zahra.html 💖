@@ -1,1 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Zahra 🌙</title>
 
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Georgia, serif;
+      color: white;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,192,203,.18), transparent 25%),
+        radial-gradient(circle at 80% 80%, rgba(255,215,150,.12), transparent 25%),
+        linear-gradient(135deg, #120b1f, #25122f, #0d1625);
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: white;
+      border-radius: 50%;
+      opacity: .7;
+      animation: twinkle 2s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: .2; transform: scale(.7); }
+      to { opacity: 1; transform: scale(1.2); }
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -30px;
+      color: #ffb6c9;
+      animation: floatUp linear infinite;
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0);
+        opacity: 0;
+      }
+      15% { opacity: .6; }
+      100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 18px;
+    }
+
+    .card {
+      width: min(720px, 100%);
+      padding: 50px 35px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 30px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(18px);
+      box-shadow:
+        0 25px 80px rgba(0,0,0,.4),
+        inset 0 1px 0 rgba(255,255,255,.12);
+      animation: appear 1.5s ease;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(35px) scale(.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .moon {
+      font-size: 55px;
+      margin-bottom: 15px;
+      animation: glow 3s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0%,100% {
+        filter: drop-shadow(0 0 5px #ffdca8);
+      }
+      50% {
+        filter: drop-shadow(0 0 25px #ffdca8);
+      }
+    }
+
+    .small {
+      color: #f4d9e4;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 9vw, 72px);
+      font-weight: 400;
+      color: #ffeaf2;
+      text-shadow: 0 0 25px rgba(255,170,200,.25);
+    }
+
+    .name {
+      color: #ffd19e;
+      font-style: italic;
+    }
+
+    .line {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        #ffd19e,
+        transparent
+      );
+      margin: 25px auto;
+    }
+
+    .message {
+      font-size: 18px;
+      line-height: 1.9;
+      color: #f4edf2;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .highlight {
+      color: #ffd19e;
+      font-style: italic;
+    }
+
+    .quote {
+      margin: 30px auto;
+      padding: 20px;
+      border-left: 2px solid #dca7ba;
+      border-right: 2px solid #dca7ba;
+      color: #f8dce7;
+      font-size: 20px;
+      font-style: italic;
+      max-width: 560px;
+    }
+
+    .button {
+      margin-top: 28px;
+      padding: 13px 27px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 50px;
+      background: rgba(255,255,255,.08);
+      color: white;
+      font-family: inherit;
+      font-size: 15px;
+      cursor: pointer;
+      transition: .3s ease;
+    }
+
+    .button:hover {
+      background: rgba(255,255,255,.16);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255,180,200,.12);
+    }
+
+    #secret {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: .8s ease;
+    }
+
+    #secret.show {
+      max-height: 300px;
+      opacity: 1;
+      margin-top: 25px;
+    }
+
+    .secret-text {
+      color: #ffe3ec;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    .footer {
+      margin-top: 35px;
+      font-size: 13px;
+      color: rgba(255,255,255,.5);
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 40px 22px;
+        border-radius: 24px;
+      }
+
+      .message {
+        font-size: 16px;
+      }
+
+      .quote {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="stars" id="stars"></div>
+
+  <div class="container">
+    <div class="card">
+
+      <div class="moon">🌙</div>
+
+      <div class="small">
+        A little something for you
+      </div>
+
+      <h1>
+        For <span class="name">Zahra</span>
+      </h1>
+
+      <div class="line"></div>
+
+      <p class="message">
+        There are some people who quietly become special
+        without even trying.
+
+        You are one of those people.
+        <br><br>
+
+        I don't know if you realize how beautiful your presence is.
+        Your kindness, your smile, the way you carry yourself,
+        and the little things you probably don't even notice...
+
+        <span class="highlight">
+          they matter more than you know.
+        </span>
+      </p>
+
+      <div class="quote">
+        "Some people enter your life as a simple friendship,
+        and somehow become a beautiful part of your thoughts."
+      </div>
+
+      <p class="message">
+        I respect you, your values, your faith, and the person
+        you are.
+
+        So I don't want to rush anything or make you uncomfortable.
+        <br><br>
+
+        I just wanted you to know that somewhere in this world,
+        there is someone who genuinely wishes the best for you,
+        quietly smiles when thinking about you,
+        and hopes that life always treats you gently.
+      </p>
+
+      <button class="button" onclick="showSecret()">
+        There is one more thing... ✨
+      </button>
+
+      <div id="secret">
+        <p class="secret-text">
+          Maybe one day I'll have the courage to say everything
+          properly.
+
+          Until then, I'll simply be grateful that I got to know
+          someone as wonderful as you.
+          <br><br>
+
+          May Allah always keep you happy, protected, and close
+          to everything that is good for you. 🤍
+        </p>
+      </div>
+
+      <div class="footer">
+        Made with sincerity, not pressure. 🌷
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Stars
+    const stars = document.getElementById("stars");
+
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement("div");
+
+      star.className = "star";
+      star.style.left = Math.random() * 100 + "%";
+      star.style.top = Math.random() * 100 + "%";
+      star.style.animationDelay = Math.random() * 3 + "s";
+
+      stars.appendChild(star);
+    }
+
+    // Floating hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+
+      heart.className = "heart";
+      heart.innerHTML =
+        Math.random() > 0.5 ? "♡" : "♥";
+
+      heart.style.left = Math.random() * 100 + "%";
+      heart.style.fontSize =
+        (12 + Math.random() * 18) + "px";
+
+      heart.style.animationDuration =
+        (6 + Math.random() * 7) + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 13000);
+    }
+
+    setInterval(createHeart, 900);
+
+    // Secret message
+    function showSecret() {
+      const secret = document.getElementById("secret");
+      const button = document.querySelector(".button");
+
+      secret.classList.toggle("show");
+
+      if (secret.classList.contains("show")) {
+        button.innerHTML = "Keep this little secret 🤍";
+      } else {
+        button.innerHTML =
+          "There is one more thing... ✨";
+      }
+    }
+  </script>
+
+</body>
+</html>
